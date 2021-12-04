@@ -26,6 +26,7 @@ export const fetchOmdbData = async imdbId => {
     if (source === 'Internet Movie Database') {
       return { name: 'IMDB', raw: Number(value.split('/')[0]), value }
     }
+
     if (source === 'Rotten Tomatoes') {
       return {
         name: 'Rotten Tomates',
@@ -33,9 +34,12 @@ export const fetchOmdbData = async imdbId => {
         value,
       }
     }
+
     if (source === 'Metacritic') {
       return { name: 'Metacritic', raw: Number(value.split('/')[0]), value }
     }
+
+    return null
   })
 
   return { director, ratings }

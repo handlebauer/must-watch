@@ -31,17 +31,20 @@ const getStats = async lid => {
 
   // Better not to assume there's a rating
   if (!letterboxdRating || letterboxdVoteCount) {
-    return
+    return null
   }
 
-  return { letterboxdRating: Number(rating.toFixed(2)), letterboxdVoteCount }
+  return {
+    letterboxdRating: Number(letterboxdRating.toFixed(2)),
+    letterboxdVoteCount,
+  }
 }
 
 export const fetchLetterboxdData = async imdbId => {
   const lid = await getLid(imdbId)
 
   if (!lid) {
-    return
+    return null
   }
 
   const details = await getDetails(lid)

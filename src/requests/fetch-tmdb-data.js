@@ -26,7 +26,7 @@ export const fetchTmdbData = async imdbId => {
   const { movie_results: movieResults } = await response.json()
 
   if (movieResults.length === 0) {
-    return
+    return null
   }
 
   const [

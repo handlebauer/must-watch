@@ -24,6 +24,7 @@ export const fetchPtpData = async url => {
     return
   }
 
+  // eslint-disable-next-line consistent-return
   return {
     url,
     year: collection.Year,
