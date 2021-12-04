@@ -25,28 +25,32 @@ export default async (_, message) => {
 
   const ptpData = await fetchPtpData(url)
 
-  const isNewMovie = ptpData.numberOfTorrents === 1
-  const exceedsVotes = ptpData.imdbVoteCount > (process.env.VOTE_MINIMUM || 500)
+  if (ptpData) {
+    const isNewMovie = ptpData.numberOfTorrents === 1
+    const exceedsVotes =
+      ptpData.imdbVoteCount > (process.env.VOTE_MINIMUM || 500)
 
-  if (isNewMovie && exceedsVotes) {
-    const [tmdbData, omdbData, letterboxdData] = await Promise.all([
-      fetchTmdbData(ptpData.imdbId),
-      fetchOmdbData(ptpData.imdbId),
-      fetchLetterboxdData(ptpData.imdbId),
-    ])
+    if (isNewMovie && exceedsVotes) {
+      const [tmdbData, omdbData, letterboxdData] = await Promise.all([
+        fetchTmdbData(ptpData.imdbId),
+        fetchOmdbData(ptpData.imdbId),
+        fetchLetterboxdData(ptpData.imdbId),
+      ])
 
-    const movie = formatMovie({
-      ...ptpData,
-      ...tmdbData,
-      ...omdbData,
-      ...letterboxdData,
-    })
+      const movie = formatMovie({
+        ...ptpData,
+        ...tmdbData,
+        ...omdbData,
+        ...letterboxdData,
+      })
 
-    const exceedsRating =
-      movie.ratings[process.env.RATING_SOURCE].raw >= process.env.RATING_MINIMUM
+      const exceedsRating =
+        movie.ratings[process.env.RATING_SOURCE].raw >=
+        process.env.RATING_MINIMUM
 
-    if (exceedsRating) {
-      Discord.send(movie)
+      if (exceedsRating) {
+        Discord.send(movie)
+      }
     }
   }
 }
