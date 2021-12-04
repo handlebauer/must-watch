@@ -1,4 +1,4 @@
-import { IRC_SERVER, IRC_NICK } from '../constants.js'
+import { IRC_SERVER, BOT_NAME } from '../constants.js'
 import { Client } from 'irc'
 import handleConnect from './handle-connect.js'
 
