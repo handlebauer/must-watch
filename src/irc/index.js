@@ -7,7 +7,6 @@ const config = {
   port: 6667,
   userName: BOT_NAME,
   realName: BOT_NAME,
-  debug: true,
 }
 
 export default () => {
