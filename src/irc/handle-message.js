@@ -7,7 +7,7 @@ import {
   fetchLetterboxdData,
 } from '../requests/index.js'
 
-import formatMovie from '../utils/format-movie'
+import formatMovie from '../utils/format-movie.js'
 
 import { Discord } from '../discord/index.js'
 
