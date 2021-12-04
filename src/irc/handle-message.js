@@ -1,9 +1,13 @@
+import { config } from 'dotenv'
+
 import {
   fetchPtpData,
   fetchTmdbData,
   fetchOmdbData,
   fetchLetterboxdData,
 } from '../requests/index.js'
+
+config()
 
 export const go = async (_, message) => {
   // Parses for torrent URL
