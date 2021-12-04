@@ -20,6 +20,9 @@ export default async (_, message) => {
     groups: { url },
   } = message.match(re)
 
+  // Log
+  console.log(`PTP URL: ${url}`)
+
   const ptpData = await fetchPtpData(url)
 
   const isNewMovie = ptpData.numberOfTorrents === 1
