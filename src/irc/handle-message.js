@@ -7,6 +7,8 @@ import {
   fetchLetterboxdData,
 } from '../requests/index.js'
 
+import { formatMovie } from '../utils/index.js'
+
 config()
 
 export const go = async (_, message) => {
@@ -27,6 +29,13 @@ export const go = async (_, message) => {
       fetchOmdbData(ptpData.imdbId),
       fetchLetterboxdData(ptpData.imdbId),
     ])
+
+    const movie = formatMovie({
+      ...ptpData,
+      ...tmdbData,
+      ...omdbData,
+      ...letterboxdData,
+    })
 
     const exceedsRating =
       movie.ratings[process.env.RATING_SOURCE].raw >= process.env.RATING_MINIMUM
