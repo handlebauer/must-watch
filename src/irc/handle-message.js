@@ -13,7 +13,7 @@ import { Discord } from '../discord/index.js'
 
 config()
 
-export const go = async (_, message) => {
+export default async (_, message) => {
   // Parses for torrent URL
   const re = /(?<url>https.+)\s\//
   const {
