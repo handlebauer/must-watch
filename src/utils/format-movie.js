@@ -1,4 +1,4 @@
-export const formatMovie = movie => {
+export default movie => {
   const ratings = [
     ...movie.ratings,
     {
