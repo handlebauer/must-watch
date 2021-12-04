@@ -2,8 +2,8 @@ import fetch from 'node-fetch'
 import { buildEmbed } from './build-embed.js'
 
 export class Discord {
-  static async send(movie) {
-    const embed = await buildEmbed(movie)
+  static async send(params) {
+    const embed = await buildEmbed(params)
 
     const init = {
       method: 'post',

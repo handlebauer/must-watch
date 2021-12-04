@@ -9,6 +9,8 @@ import {
 
 import { formatMovie } from '../utils/index.js'
 
+import { Discord } from '../discord/index.js'
+
 config()
 
 export const go = async (_, message) => {
@@ -41,7 +43,7 @@ export const go = async (_, message) => {
       movie.ratings[process.env.RATING_SOURCE].raw >= process.env.RATING_MINIMUM
 
     if (exceedsRating) {
-      // TODO: Send notification to discord
+      Discord.send(movie)
     }
   }
 }
