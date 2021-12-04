@@ -1,9 +1,11 @@
 {
   "name": "must-watch",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A service to keep an eye out for must-watch films so you don't have to",
-  "main": "lib/index.js",
+  "type": "module",
+  "main": "src/index.js",
   "scripts": {},
+  "prettier": "oh-so-pretty",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/handlebauer/must-watch.git"
@@ -13,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/handlebauer/must-watch/issues"
   },
-  "homepage": "https://github.com/handlebauer/must-watch#readme"
+  "homepage": "https://github.com/handlebauer/must-watch#readme",
+  "devDependencies": {
+    "oh-so-pretty": "^1.0.0",
+    "prettier": "2.5.0"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0"
+  }
 }
