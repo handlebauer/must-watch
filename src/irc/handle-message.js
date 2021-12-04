@@ -26,7 +26,7 @@ export default async (_, message) => {
   const ptpData = await fetchPtpData(url)
 
   const isNewMovie = ptpData.numberOfTorrents === 1
-  const exceedsVotes = ptpData.imdbVoteCount > process.env.VOTE_MINIMUM || 500
+  const exceedsVotes = ptpData.imdbVoteCount > (process.env.VOTE_MINIMUM || 500)
 
   if (isNewMovie && exceedsVotes) {
     const [tmdbData, omdbData, letterboxdData] = await Promise.all([
