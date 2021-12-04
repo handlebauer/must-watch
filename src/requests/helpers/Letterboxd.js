@@ -17,14 +17,14 @@ export default class {
       ...params,
       nonce: uuid(),
       timestamp: Math.round(Date.now() / 1e3), // Number of seconds elapsed since January 1, 1970 00:00:00 UTC
-      apikey: process.env.BOXD_API_KEY,
+      apikey: process.env.LETTERBOXD_API_KEY,
     })
     return `${this.method}\u0000${this.url}\u0000`
   }
 
   generateSignature(saltedString) {
     return crypto
-      .createHmac('sha256', process.env.BOXD_API_SECRET)
+      .createHmac('sha256', process.env.LETTERBOXD_API_SECRET)
       .update(saltedString)
       .digest('hex')
   }
