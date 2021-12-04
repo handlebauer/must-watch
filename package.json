@@ -1,0 +1,17 @@
+{
+  "name": "must-watch",
+  "version": "0.0.1",
+  "description": "A service to keep an eye out for must-watch films so you don't have to",
+  "main": "lib/index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/handlebauer/must-watch.git"
+  },
+  "author": "Donald Geddes <hi@donaldgeddes.ca>",
+  "license": "The Unlicense",
+  "bugs": {
+    "url": "https://github.com/handlebauer/must-watch/issues"
+  },
+  "homepage": "https://github.com/handlebauer/must-watch#readme"
+}
