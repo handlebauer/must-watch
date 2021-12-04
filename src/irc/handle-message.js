@@ -14,9 +14,21 @@ export const go = async (_, message) => {
 
   const ptpData = await fetchPtpData(url)
 
-  const [tmdbData, omdbData, letterboxdData] = await Promise.all([
-    fetchTmdbData(ptpData.imdbId),
-    fetchOmdbData(ptpData.imdbId),
-    fetchLetterboxdData(ptpData.imdbId),
-  ])
+  const isNewMovie = ptpData.numberOfTorrents === 1
+  const exceedsVotes = ptpData.imdbVoteCount > process.env.VOTE_MINIMUM || 500
+
+  if (isNewMovie && exceedsVotes) {
+    const [tmdbData, omdbData, letterboxdData] = await Promise.all([
+      fetchTmdbData(ptpData.imdbId),
+      fetchOmdbData(ptpData.imdbId),
+      fetchLetterboxdData(ptpData.imdbId),
+    ])
+
+    const exceedsRating =
+      movie.ratings[process.env.RATING_SOURCE].raw >= process.env.RATING_MINIMUM
+
+    if (exceedsRating) {
+      // TODO: Send notification to discord
+    }
+  }
 }
