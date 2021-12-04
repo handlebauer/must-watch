@@ -13,7 +13,10 @@ export const go = async (_, message) => {
   } = message.match(re)
 
   const ptpData = await fetchPtpData(url)
-  const tmdbData = await fetchTmdbData(ptpData.imdbId)
-  const omdbData = await fetchOmdbData(ptpData.imdbId)
-  const letterboxdData = await fetchLetterboxdData(ptpData.imdbId)
+
+  const [tmdbData, omdbData, letterboxdData] = await Promise.all([
+    fetchTmdbData(ptpData.imdbId),
+    fetchOmdbData(ptpData.imdbId),
+    fetchLetterboxdData(ptpData.imdbId),
+  ])
 }
