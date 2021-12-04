@@ -21,10 +21,9 @@ export const fetchPtpData = async url => {
   const collection = await response.json()
 
   if (!collection.ImdbId) {
-    return
+    return undefined
   }
 
-  // eslint-disable-next-line consistent-return
   return {
     url,
     year: collection.Year,

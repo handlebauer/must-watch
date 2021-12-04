@@ -44,7 +44,7 @@ export const fetchLetterboxdData = async imdbId => {
   const lid = await getLid(imdbId)
 
   if (!lid) {
-    return null
+    return {}
   }
 
   const details = await getDetails(lid)

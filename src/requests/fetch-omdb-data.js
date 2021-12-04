@@ -39,7 +39,7 @@ export const fetchOmdbData = async imdbId => {
       return { name: 'Metacritic', raw: Number(value.split('/')[0]), value }
     }
 
-    return null
+    return {}
   })
 
   return { director, ratings }
