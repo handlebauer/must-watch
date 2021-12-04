@@ -8,7 +8,7 @@ export class Discord {
     const init = {
       method: 'post',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ username: 'testing123', embeds: [embed] }),
+      body: JSON.stringify({ username: 'MustWatch', embeds: [embed] }),
     }
 
     const response = await fetch(process.env.DISCORD_WEBHOOK_URL, init)
