@@ -5,12 +5,12 @@ import handleConnect from './handle-connect.js'
 const config = {
   autoConnect: false,
   port: 6667,
-  userName: IRC_NICK,
-  realName: IRC_NICK,
+  userName: BOT_NAME,
+  realName: BOT_NAME,
   debug: true,
 }
 
 export default () => {
-  const client = new Client(IRC_SERVER, IRC_NICK, config)
+  const client = new Client(IRC_SERVER, BOT_NAME, config)
   client.connect(handleConnect(client))
 }

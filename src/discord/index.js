@@ -1,4 +1,6 @@
 import fetch from 'node-fetch'
+
+import { BOT_NAME } from '../constants.js'
 import { buildEmbed } from './build-embed.js'
 
 export class Discord {
@@ -8,7 +10,7 @@ export class Discord {
     const init = {
       method: 'post',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ username: 'MustWatch', embeds: [embed] }),
+      body: JSON.stringify({ username: BOT_NAME, embeds: [embed] }),
     }
 
     const response = await fetch(process.env.DISCORD_WEBHOOK_URL, init)
