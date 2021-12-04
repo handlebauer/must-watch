@@ -1,6 +1,6 @@
 {
   "name": "must-watch",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A service to keep an eye out for must-watch films so you don't have to",
   "type": "module",
   "main": "src/index.js",
