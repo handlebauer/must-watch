@@ -1,1 +1,1 @@
-export default handleMessage = async (_, message) => {}
+export default async (_, message) => {}

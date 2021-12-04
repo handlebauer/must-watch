@@ -4,7 +4,7 @@ import handleMessage from './handle-message.js'
 
 config()
 
-export default handleConnect = client => () => {
+export default client => () => {
   console.log(`Successfully connected as ${client.hostMask}`)
 
   client.say(
