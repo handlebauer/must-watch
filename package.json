@@ -5,9 +5,9 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {},
-  "prettier": "oh-so-pretty",
+  "prettier": "@hbauer/prettier-config",
   "eslintConfig": {
-    "extends": "spare"
+    "extends": "@hbauer/eslint-config"
   },
   "repository": {
     "type": "git",
@@ -20,9 +20,8 @@
   },
   "homepage": "https://github.com/handlebauer/must-watch#readme",
   "devDependencies": {
-    "eslint-config-spare": "^0.1.3",
-    "oh-so-pretty": "^1.0.0",
-    "prettier": "2.5.0"
+    "@hbauer/eslint-config": "^1.0.0",
+    "@hbauer/prettier-config": "^1.0.0"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
