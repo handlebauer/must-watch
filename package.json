@@ -20,9 +20,7 @@
   },
   "homepage": "https://github.com/handlebauer/must-watch#readme",
   "devDependencies": {
-    "eslint": "^8.4.0",
     "eslint-config-spare": "^0.1.3",
-    "eslint-plugin-import": "^2.25.3",
     "oh-so-pretty": "^1.0.0",
     "prettier": "2.5.0"
   },
