@@ -32,7 +32,7 @@ export const buildEmbed = async movie => {
       value: Object.values(movie.ratings)
         .map(
           ({ name, value, count }) =>
-            `**${name}:** ${value}${count && ` (${count})`}`
+            `**${name}:** ${value}${count ? ` (${count})` : ''}`
         )
         .join('\n'),
     },

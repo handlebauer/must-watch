@@ -56,7 +56,7 @@ export const fetchTmdbData = async imdbId => {
   return {
     title:
       englishTitle +
-      (englishTitle !== originalTitle ? ` (${originalTitle})` : ''),
+      (englishTitle !== originalTitle ? ` - ${originalTitle}` : ''),
     overview,
     posterUrl: baseUrl + posterSizes[3] + posterPath,
   }
