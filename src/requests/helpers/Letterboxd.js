@@ -1,6 +1,9 @@
+import { config } from 'dotenv'
 import fetch from 'node-fetch'
 import crypto from 'crypto'
 import { v4 as uuid } from 'uuid'
+
+config()
 
 export default class {
   constructor() {

@@ -30,7 +30,7 @@ const getStats = async lid => {
   } = await letterboxd.get({ path: `/film/${lid}/statistics` })
 
   // Better not to assume there's a rating
-  if (!letterboxdRating || letterboxdVoteCount) {
+  if (!letterboxdRating || !letterboxdVoteCount) {
     return null
   }
 
