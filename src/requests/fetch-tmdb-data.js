@@ -23,20 +23,12 @@ export const fetchTmdbData = async imdbId => {
     )
   }
 
-  const { movie_results: movieResults } = await response.json()
+  const { movie_results: movieResults, tv_results: tvResults } =
+    await response.json()
 
-  if (movieResults.length === 0) {
-    return null
-  }
+  const results = [...movieResults, ...tvResults]
 
-  const [
-    {
-      title: englishTitle,
-      original_title: originalTitle = '',
-      overview,
-      poster_path: posterPath,
-    },
-  ] = movieResults
+  const [{ overview, poster_path: posterPath }] = results
 
   url.pathname = `/${TMDB_API_VERSION}/configuration`
   url.searchParams.delete('external_source')
@@ -54,9 +46,6 @@ export const fetchTmdbData = async imdbId => {
   } = await response.json()
 
   return {
-    title:
-      englishTitle +
-      (englishTitle !== originalTitle ? ` - ${originalTitle}` : ''),
     overview,
     posterUrl: baseUrl + posterSizes[3] + posterPath,
   }
