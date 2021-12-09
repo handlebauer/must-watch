@@ -14,7 +14,7 @@ export default class {
   }
 
   // Generate [METHOD]\u0000[FULLY QUALIFIED URL]\u0000[BODY]
-  generateSaltedString(params) {
+  generateSaltedString({ params, body = '' }) {
     this.url = new URL(this.baseUrl + this.path)
     this.url.search = new URLSearchParams({
       ...params,
@@ -22,7 +22,7 @@ export default class {
       timestamp: Math.round(Date.now() / 1e3), // Number of seconds elapsed since January 1, 1970 00:00:00 UTC
       apikey: process.env.LETTERBOXD_API_KEY,
     })
-    return `${this.method}\u0000${this.url}\u0000`
+    return `${this.method}\u0000${this.url}\u0000${body}`
   }
 
   generateSignature(saltedString) {
@@ -35,7 +35,7 @@ export default class {
   async get({ path, ...params }) {
     this.path = path
 
-    const saltedString = this.generateSaltedString(params)
+    const saltedString = this.generateSaltedString({ params })
     const signature = this.generateSignature(saltedString)
 
     this.url.searchParams.append('signature', signature)
