@@ -20,7 +20,7 @@ const movie = {
   url: 'https://passthepopcorn.me/torrents.php?id=173329&torrentid=599855',
 }
 
-test.skip('Building embed returns desirable object', async t => {
+test('Building embed returns desirable object', async t => {
   const embed = await buildEmbed(movie)
 
   // Should yield something like:
