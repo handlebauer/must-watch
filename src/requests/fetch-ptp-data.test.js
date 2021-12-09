@@ -3,7 +3,7 @@ import { fetchPtpData } from './fetch-ptp-data.js'
 
 const url = 'https://passthepopcorn.me/torrents.php?id=173329&torrentid=599855'
 
-test('Fetching PTP data returns desired values', async t => {
+test.skip('Fetching PTP data returns desired values', async t => {
   const ptpData = await fetchPtpData(url)
 
   // Should yield something like:

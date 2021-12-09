@@ -2,7 +2,7 @@ import test from 'ava'
 
 import { fetchTmdbData } from './fetch-tmdb-data.js'
 
-test('Fetching TMDB data returns desired values when IMDB ID refrences a movie result', async t => {
+test.skip('Fetching TMDB data returns desired values when IMDB ID refrences a movie result', async t => {
   const imdbId = 'tt6723592'
   const tmdbData = await fetchTmdbData(imdbId)
 
@@ -36,7 +36,7 @@ test('Fetching TMDB data returns desired values when IMDB ID refrences a movie r
   t.regex(tmdbData.posterUrl, /^https.+\.jpg$/)
 })
 
-test('Fetching TMDB data returns desired values when IMDB ID references a TV result', async t => {
+test.skip('Fetching TMDB data returns desired values when IMDB ID references a TV result', async t => {
   const imdbId = 'tt7712606'
   const tmdbData = await fetchTmdbData(imdbId)
 

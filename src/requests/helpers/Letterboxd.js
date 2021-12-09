@@ -22,7 +22,7 @@ export default class {
       timestamp: Math.round(Date.now() / 1e3), // Number of seconds elapsed since January 1, 1970 00:00:00 UTC
       apikey: process.env.LETTERBOXD_API_KEY,
     })
-    return `${this.method}\u0000${this.url}\u0000${body}`
+    return [this.method, this.url, body].join('\u0000')
   }
 
   generateSignature(saltedString) {
