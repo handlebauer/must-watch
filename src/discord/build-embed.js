@@ -1,7 +1,11 @@
 import json from '../utils/import-json.js'
 
 export const buildEmbed = async movie => {
-  const title = `${movie.title} (${movie.year}) by ${movie.director}`
+  const title = `${
+    movie.title === movie.originalTitle
+      ? movie.title
+      : `${movie.title} AKA ${movie.originalTitle}`
+  } (${movie.year}) by ${movie.director}`
 
   const url = movie.url
 

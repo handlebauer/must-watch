@@ -4,6 +4,7 @@ import { buildEmbed } from './build-embed.js'
 
 const movie = {
   title: 'Violent',
+  originalTitle: 'Violent',
   year: '2014',
   director: 'Andrew Huculiak',
   genres: ['Drama'],

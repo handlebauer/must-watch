@@ -26,12 +26,65 @@ export const fetchTmdbData = async imdbId => {
   const { movie_results: movieResults, tv_results: tvResults } =
     await response.json()
 
-  const results = [...movieResults, ...tvResults]
+  let result
 
-  const [{ overview, poster_path: posterPath }] = results
+  if (movieResults.length === 1) {
+    url.pathname = `/${TMDB_API_VERSION}/movie/${imdbId}`
+    url.searchParams.delete('external_source')
+
+    response = await fetch(url)
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed with status: ${response.status} (${response.statusText})`
+      )
+    }
+
+    const movie = await response.json()
+
+    result = {
+      type: 'Movie',
+      title: movie.title,
+      originalTitle: movie.original_title,
+      overview: movie.overview,
+      genres: movie.genres,
+      languages: movie.spoken_languages,
+      runtime: movie.runtime,
+      posterPath: movie.poster_path,
+    }
+  } else if (tvResults.length == 1) {
+    const [{ id: tvId }] = tvResults
+    url.pathname = `/${TMDB_API_VERSION}/tv/${tvId}`
+    url.searchParams.delete('external_source')
+
+    response = await fetch(url)
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed with status: ${response.status} (${response.statusText})`
+      )
+    }
+    const tvShow = await response.json()
+
+    const [startYear] = tvShow.first_air_date.split('-')
+    const [endYear] = tvShow.last_air_date.split('-')
+
+    result = {
+      type: tvShow.type,
+      title: tvShow.name,
+      originalTitle: tvShow.original_name,
+      year: startYear === endYear ? startYear : `${startYear}-${endYear}`,
+      overview: tvShow.overview,
+      genres: tvShow.genres,
+      languages: tvShow.spoken_languages,
+      runtime: tvShow.episode_run_time[0],
+      posterPath: tvShow.poster_path,
+    }
+  } else {
+    return null
+  }
 
   url.pathname = `/${TMDB_API_VERSION}/configuration`
-  url.searchParams.delete('external_source')
 
   response = await fetch(url)
 
@@ -45,8 +98,10 @@ export const fetchTmdbData = async imdbId => {
     images: { secure_base_url: baseUrl, poster_sizes: posterSizes },
   } = await response.json()
 
+  const { posterPath, ...rest } = result
+
   return {
-    overview,
+    ...rest,
     posterUrl: baseUrl + posterSizes[3] + posterPath,
   }
 }

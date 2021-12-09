@@ -10,19 +10,6 @@ const getLid = async imdbId => {
   return id
 }
 
-const getDetails = async lid => {
-  const {
-    runTime: runtime,
-    genres,
-    languages,
-  } = await letterboxd.get({ path: `/film/${lid}` })
-  return {
-    genres: genres.map(({ name }) => name),
-    languages: languages.map(({ name }) => name),
-    runtime,
-  }
-}
-
 const getStats = async lid => {
   const {
     rating: letterboxdRating,
@@ -44,10 +31,9 @@ export const fetchLetterboxdData = async imdbId => {
   const lid = await getLid(imdbId)
 
   if (!lid) {
-    return {}
+    return undefined
   }
 
-  const details = await getDetails(lid)
   const letterboxdStats = await getStats(lid)
-  return { ...details, ...letterboxdStats }
+  return letterboxdStats
 }
