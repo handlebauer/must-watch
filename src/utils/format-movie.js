@@ -3,7 +3,7 @@ export default movie => {
     movie.title + movie.originalTitle !== movie.title
       ? ` AKA ${movie.originalTitle}`
       : ''
-  const genres = movie.genres(({ name }) => name)
+  const genres = movie.genres.map(({ name }) => name)
   const languages = movie.languages.map(({ english_name: name }) => name)
 
   const ratings = [
