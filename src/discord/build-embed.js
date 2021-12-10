@@ -12,10 +12,10 @@ export const buildEmbed = async movie => {
   const color = 4444928
 
   const fields = [
-    {
+    ...(movie.overview && {
       name: '__Overview__',
       value: `||${movie.overview}||`,
-    },
+    }),
     {
       name: '__Genre(s)__',
       value: movie.genres.length ? movie.genres.join(', ') : 'N/A',
