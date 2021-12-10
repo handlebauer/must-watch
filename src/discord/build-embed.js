@@ -18,17 +18,17 @@ export const buildEmbed = async movie => {
     },
     {
       name: '__Genre(s)__',
-      value: movie.genres.join(', '),
+      value: movie.genres.length ? movie.genres.join(', ') : 'N/A',
       inline: true,
     },
     {
       name: '__Language(s)__',
-      value: movie.languages.join(', '),
+      value: movie.languages.length ? movie.languages.join(', ') : 'N/A',
       inline: true,
     },
     {
       name: '__Runtime__',
-      value: `${movie.runtime} minutes`,
+      value: `${movie.runtime || 'NaN'} minutes`,
       inline: true,
     },
     {

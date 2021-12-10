@@ -1,7 +1,10 @@
+import { config } from 'dotenv'
 import fetch from 'node-fetch'
 
 import { BOT_NAME } from '../constants.js'
 import { buildEmbed } from './build-embed.js'
+
+config()
 
 export class Discord {
   static async send(params) {
