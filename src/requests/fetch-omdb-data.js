@@ -30,7 +30,7 @@ export const fetchOmdbData = async imdbId => {
     if (source === 'Rotten Tomatoes') {
       return {
         name: 'Rotten Tomates',
-        raw: Number(value.substring(0, 2)),
+        raw: Number(value.slice(0, -1)),
         value,
       }
     }
