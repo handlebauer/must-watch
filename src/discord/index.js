@@ -23,5 +23,7 @@ export class Discord {
         `Failed with status: ${response.status} (${response.statusText})`
       )
     }
+
+    return response
   }
 }

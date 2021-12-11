@@ -1,3 +1,4 @@
+import { DISCORD_AUTHOR_ICON_URL } from '../constants.js'
 import json from '../utils/import-json.js'
 
 export const buildEmbed = async movie => {
@@ -12,23 +13,23 @@ export const buildEmbed = async movie => {
   const color = 4444928
 
   const fields = [
-    ...(movie.overview && {
+    movie.overview && {
       name: '__Overview__',
       value: `||${movie.overview}||`,
-    }),
-    {
+    },
+    movie.genres.length && {
       name: '__Genre(s)__',
-      value: movie.genres.length ? movie.genres.join(', ') : 'N/A',
+      value: movie.genres.join(', '),
       inline: true,
     },
-    {
+    movie.languages.length && {
       name: '__Language(s)__',
-      value: movie.languages.length ? movie.languages.join(', ') : 'N/A',
+      value: movie.languages.join(', '),
       inline: true,
     },
-    {
+    movie.runtime && {
       name: '__Runtime__',
-      value: `${movie.runtime || 'NaN'} minutes`,
+      value: `${movie.runtime} minutes`,
       inline: true,
     },
     {
@@ -40,13 +41,13 @@ export const buildEmbed = async movie => {
         )
         .join('\n'),
     },
-  ]
+  ].filter(Boolean)
 
   const image = { url: movie.posterUrl }
 
   const author = {
     name: 'MustWatch',
-    icon_url: 'https://i.imgur.com/OEXcE7w.jpg',
+    icon_url: DISCORD_AUTHOR_ICON_URL,
   }
 
   const { version, homepage } = await json('../../package.json')
