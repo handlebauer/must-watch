@@ -44,9 +44,8 @@ export default async (_, message) => {
         ...letterboxdData,
       })
 
-      const exceedsRating =
-        movie.ratings[process.env.RATING_SOURCE].raw >=
-        process.env.RATING_MINIMUM
+      const rating = movie.ratings[process.env.RATING_SOURCE]?.raw || 0
+      const exceedsRating = rating >= process.env.RATING_MINIMUM
 
       if (exceedsRating) {
         Discord.send(movie)

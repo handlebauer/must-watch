@@ -26,6 +26,7 @@ export const fetchPtpData = async url => {
 
   return {
     url,
+    year: Number(collection.Year),
     imdbId: `tt${collection.ImdbId}`,
     imdbRating: Number(collection.ImdbRating),
     imdbVoteCount: Number(collection.ImdbVoteCount),
