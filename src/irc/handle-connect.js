@@ -5,7 +5,7 @@ import handleMessage from './handle-message.js'
 config()
 
 export default client => () => {
-  console.log(`Successfully connected as ${client.hostMask}`)
+  console.log(`IRC: connected as ${client.hostMask}`)
 
   client.say(
     'Hummingbird',

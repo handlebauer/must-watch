@@ -12,8 +12,7 @@ export const fetchTmdbData = async imdbId => {
     external_source: 'imdb_id',
   })
 
-  // Log
-  console.log(`TMDB URL: ${url}`)
+  console.log(`    => TMDB: ${url}`)
 
   let response = await fetch(url)
 
