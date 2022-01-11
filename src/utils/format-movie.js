@@ -13,7 +13,9 @@ export default movie => {
       value: `${movie.letterboxdRating}/5`,
       count: movie.letterboxdVoteCount,
     },
-  ].reduce((acc, x) => ({ ...acc, [x.name.toLowerCase()]: x }), {})
+  ]
+    .filter(Boolean)
+    .reduce((acc, x) => ({ ...acc, [x.name.toLowerCase()]: x }), {})
 
   ratings.imdb = { ...ratings.imdb, count: movie.imdbVoteCount }
 
