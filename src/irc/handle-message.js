@@ -23,31 +23,35 @@ export default async (_, message) => {
 
   const ptpData = await fetchPtpData(url)
 
-  if (ptpData) {
-    const isNewMovie = ptpData.numberOfTorrents === 1
-    const exceedsVotes =
-      ptpData.imdbVoteCount > (process.env.VOTE_MINIMUM || 500)
+  const isNewMovie = ptpData?.numberOfTorrents === 1
 
-    if (isNewMovie && exceedsVotes) {
-      const [tmdbData, omdbData, letterboxdData] = await Promise.all([
-        fetchTmdbData(ptpData.imdbId),
-        fetchOmdbData(ptpData.imdbId),
-        fetchLetterboxdData(ptpData.imdbId),
-      ])
+  if (isNewMovie) {
+    const [tmdbData, omdbData, letterboxdData] = await Promise.all([
+      fetchTmdbData(ptpData.imdbId),
+      fetchOmdbData(ptpData.imdbId),
+      fetchLetterboxdData(ptpData.imdbId),
+    ])
 
-      const movie = formatMovie({
-        ...ptpData,
-        ...tmdbData,
-        ...omdbData,
-        ...letterboxdData,
-      })
+    const movie = formatMovie({
+      ...ptpData,
+      ...tmdbData,
+      ...omdbData,
+      ...letterboxdData,
+    })
 
-      const rating = movie.ratings[process.env.RATING_SOURCE]?.raw || 0
-      const exceedsRating = rating >= process.env.RATING_MINIMUM
+    const voteCount = movie.ratings[process.env.RATING_SOURCE]?.count
+    // NOTE: if the rating source doesn't include a vote count, this will assign as
+    // true (i.e. we don't care about vote count for those sources with none)
+    const exceedsVoteCount = voteCount
+      ? voteCount > process.env.VOTE_MINIMUM
+      : true
 
-      if (exceedsRating) {
-        Discord.send(movie)
-      }
+    const rating = movie.ratings[process.env.RATING_SOURCE]?.raw
+    // NOTE: rating may be undefined, in which case this will always assign as false
+    const exceedsRating = rating >= process.env.RATING_MINIMUM
+
+    if (exceedsRating && exceedsVoteCount) {
+      Discord.send(movie)
     }
   }
 }
