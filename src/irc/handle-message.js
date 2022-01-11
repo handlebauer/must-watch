@@ -16,9 +16,7 @@ config()
 export default async (_, message) => {
   // Parses for torrent URL
   const re = /(?<url>https.+)\s\//
-  const {
-    groups: { url },
-  } = message.match(re)
+  const { url } = message.match(re)?.groups
 
   // Log
   console.log(`PTP URL: ${url}`)
