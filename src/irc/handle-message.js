@@ -25,10 +25,9 @@ export default async (_, message) => {
   const isNewMovie = ptpData?.numberOfTorrents === 1
 
   if (isNewMovie) {
-    console.log(`
-      => new movie found: https://www.imdb.com/title/${ptpData.imdbId}
-      => sending additional requests
-    `)
+    console.log(
+      `  => new movie found: https://www.imdb.com/title/${ptpData.imdbId}`
+    )
     const [tmdbData, omdbData, letterboxdData] = await Promise.all([
       fetchTmdbData(ptpData.imdbId),
       fetchOmdbData(ptpData.imdbId),
