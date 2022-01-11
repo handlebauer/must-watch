@@ -15,7 +15,10 @@ export default movie => {
     },
   ]
     .filter(Boolean)
-    .reduce((acc, x) => ({ ...acc, [x.name.toLowerCase()]: x }), {})
+    .reduce(
+      (acc, x) => ({ ...acc, [x.name.split(' ').join('_').toLowerCase()]: x }),
+      {}
+    )
 
   ratings.imdb = { ...ratings.imdb, count: movie.imdbVoteCount }
 
