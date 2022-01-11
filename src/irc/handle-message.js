@@ -19,13 +19,14 @@ export default async (_, message) => {
   const { url } = message.match(re)?.groups
 
   // Log
-  console.log(`PTP URL: ${url}`)
+  console.log(`Announce: ${url}`)
 
   const ptpData = await fetchPtpData(url)
 
   const isNewMovie = ptpData?.numberOfTorrents === 1
 
   if (isNewMovie) {
+    console.log(` => New movie found: ${ptpData.imdbId}`)
     const [tmdbData, omdbData, letterboxdData] = await Promise.all([
       fetchTmdbData(ptpData.imdbId),
       fetchOmdbData(ptpData.imdbId),
@@ -46,9 +47,10 @@ export default async (_, message) => {
       ? voteCount > process.env.VOTE_MINIMUM
       : true
 
-    const rating = movie.ratings[process.env.RATING_SOURCE]?.raw
+    const rating = movie.ratings[process.env.RATING_SOURCE]
     // NOTE: rating may be undefined, in which case this will always assign as false
-    const exceedsRating = rating >= process.env.RATING_MINIMUM
+    const exceedsRating = rating?.raw >= process.env.RATING_MINIMUM
+    console.log(` => Rating: ${JSON.stringify(rating, null, 2)}`)
 
     if (exceedsRating && exceedsVoteCount) {
       Discord.send(movie)
