@@ -23,19 +23,19 @@ export const fetchOmdbData = async imdbId => {
 
   const ratings = rawRatings.map(({ Source: source, Value: value }) => {
     if (source === 'Internet Movie Database') {
-      return { name: 'imdb', raw: Number(value.split('/')[0]), value }
+      return { name: 'IMDB', raw: Number(value.split('/')[0]), value }
     }
 
     if (source === 'Rotten Tomatoes') {
       return {
-        name: 'rotten_tomatoes',
+        name: 'Rotten Tomatoes',
         raw: Number(value.slice(0, -1)),
         value,
       }
     }
 
     if (source === 'Metacritic') {
-      return { name: 'metacritic', raw: Number(value.split('/')[0]), value }
+      return { name: 'Metacritic', raw: Number(value.split('/')[0]), value }
     }
 
     return {}

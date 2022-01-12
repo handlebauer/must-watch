@@ -8,14 +8,17 @@ export default movie => {
   const ratings = [
     ...movie.ratings,
     movie.letterboxdRating && {
-      name: 'letterboxd',
+      name: 'Letterboxd',
       raw: movie.letterboxdRating,
       value: `${movie.letterboxdRating}/5`,
       count: movie.letterboxdVoteCount,
     },
   ]
     .filter(Boolean)
-    .reduce((acc, x) => ({ ...acc, [x.name]: x }), {})
+    .reduce(
+      (acc, x) => ({ ...acc, [x.name.split(' ').join('_').toLowerCase()]: x }),
+      {}
+    )
 
   ratings.imdb = { ...ratings.imdb, count: movie.imdbVoteCount }
 
