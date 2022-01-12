@@ -34,6 +34,11 @@ export default async (_, message) => {
       fetchLetterboxdData(ptpData.imdbId),
     ])
 
+    // If the movie doesn't exist on TMDb yet, we'll be without genre, languages, etc., so an early return makes sense
+    if (tmdbData === null) {
+      return
+    }
+
     const movie = formatMovie({
       ...ptpData,
       ...tmdbData,
