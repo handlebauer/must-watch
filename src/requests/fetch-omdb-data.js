@@ -19,7 +19,15 @@ export const fetchOmdbData = async imdbId => {
     )
   }
 
-  const { Ratings: rawRatings, Director: director } = await response.json()
+  const {
+    Ratings: rawRatings,
+    Director: director,
+    Error: error,
+  } = await response.json()
+
+  if (error) {
+    return null
+  }
 
   const ratings = rawRatings.map(({ Source: source, Value: value }) => {
     if (source === 'Rotten Tomatoes') {
