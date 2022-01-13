@@ -6,21 +6,25 @@ export default movie => {
   const languages = movie.languages.map(({ english_name: name }) => name)
 
   const ratings = [
-    ...movie.ratings,
+    {
+      name: 'IMDb',
+      raw: movie.imdbRating,
+      value: `${movie.imdbRating}/10`,
+      count: movie.imdbVoteCount,
+    },
     movie.letterboxdRating && {
       name: 'Letterboxd',
       raw: movie.letterboxdRating,
       value: `${movie.letterboxdRating}/5`,
       count: movie.letterboxdVoteCount,
     },
+    ...movie.ratings,
   ]
     .filter(Boolean)
     .reduce(
       (acc, x) => ({ ...acc, [x.name.split(' ').join('_').toLowerCase()]: x }),
       {}
     )
-
-  ratings.imdb = { ...ratings.imdb, count: movie.imdbVoteCount }
 
   return {
     title,
