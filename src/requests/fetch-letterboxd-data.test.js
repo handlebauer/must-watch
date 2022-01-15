@@ -2,7 +2,7 @@ import test from 'ava'
 
 import { fetchLetterboxdData } from './fetch-letterboxd-data.js'
 
-test('Fetching Letterboxd data returns desired ratings', async t => {
+test.skip('Fetching Letterboxd data returns desired ratings', async t => {
   const imdbId = 'tt6723592'
   const letterboxdData = await fetchLetterboxdData(imdbId)
 
@@ -16,7 +16,7 @@ test('Fetching Letterboxd data returns desired ratings', async t => {
   t.regex(String(letterboxdData.letterboxdVoteCount), /[0-9][1-9]*/)
 })
 
-test('Fetching Letterboxd data from movie without rating returns null', async t => {
+test.skip('Fetching Letterboxd data from movie without rating returns null', async t => {
   const imdbId = 'tt5881406'
   const letterboxdData = await fetchLetterboxdData(imdbId)
 

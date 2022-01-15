@@ -1,9 +1,14 @@
 import { config } from 'dotenv'
 import fetch from 'node-fetch'
 
+import {
+  fetchMetacriticReviewCount,
+  fetchRottenTomatoesReviewCount,
+} from './index.js'
+
 config()
 
-export const fetchOmdbData = async imdbId => {
+export const fetchOmdbData = async (imdbId, details) => {
   const apiKey = 'aa538a64'
 
   const url = new URL('http://omdbapi.com')
@@ -29,21 +34,35 @@ export const fetchOmdbData = async imdbId => {
     return null
   }
 
-  const ratings = rawRatings.map(({ Source: source, Value: value }) => {
-    if (source === 'Rotten Tomatoes') {
-      return {
-        name: 'Rotten Tomatoes',
-        raw: Number(value.slice(0, -1)),
-        value,
-      }
-    }
+  const ratings = (
+    await Promise.all(
+      rawRatings.map(async ({ Source: source, Value: value }) => {
+        if (source === 'Rotten Tomatoes') {
+          const reviewCount = await fetchRottenTomatoesReviewCount(details)
 
-    if (source === 'Metacritic') {
-      return { name: 'Metacritic', raw: Number(value.split('/')[0]), value }
-    }
+          return {
+            name: 'Rotten Tomatoes',
+            raw: Number(value.slice(0, -1)),
+            value,
+            count: reviewCount || null,
+          }
+        }
 
-    return null
-  })
+        if (source === 'Metacritic') {
+          const reviewCount = await fetchMetacriticReviewCount(details)
+
+          return {
+            name: 'Metacritic',
+            raw: Number(value.split('/')[0]),
+            value,
+            count: reviewCount || null,
+          }
+        }
+
+        return null
+      })
+    )
+  ).filter(Boolean)
 
   return { director, ratings }
 }

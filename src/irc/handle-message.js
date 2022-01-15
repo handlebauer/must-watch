@@ -5,6 +5,8 @@ import {
   fetchTmdbData,
   fetchOmdbData,
   fetchLetterboxdData,
+  fetchMetacriticReviewCount,
+  fetchRottenTomatoesReviewCount,
 } from '../requests/index.js'
 
 import formatMovie from '../utils/format-movie.js'
@@ -28,11 +30,15 @@ export default async (_, message) => {
     console.log(
       `  => new movie found: https://www.imdb.com/title/${ptpData.imdbId}`
     )
-    const [tmdbData, omdbData, letterboxdData] = await Promise.all([
+    const [tmdbData, , letterboxdData] = await Promise.all([
       fetchTmdbData(ptpData.imdbId),
-      fetchOmdbData(ptpData.imdbId),
       fetchLetterboxdData(ptpData.imdbId),
     ])
+
+    const omdbData = fetchOmdbData(ptpData.imdbId, {
+      title: ptpData.title,
+      year: tmdbData.year,
+    })
 
     // If sources don't return data, return early
     if (tmdbData === null || omdbData === null) {

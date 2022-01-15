@@ -2,7 +2,7 @@ import test from 'ava'
 
 import { Discord } from './index.js'
 
-test('Should successfully send Discord notification via webhook', async t => {
+test.skip('Should successfully send Discord notification via webhook', async t => {
   const mockMovie = {
     title: 'Violent',
     originalTitle: 'Violent',

@@ -30,6 +30,7 @@
     ]
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.10",
     "dotenv": "^10.0.0",
     "formdata-node": "^4.3.1",
     "irc": "^0.5.2",
