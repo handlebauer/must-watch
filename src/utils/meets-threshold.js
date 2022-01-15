@@ -1,4 +1,4 @@
-export const assessThreshold = movie => {
+export const meetsThreshold = movie => {
   const voteCount = movie.ratings[process.env.RATING_SOURCE]?.count
   console.log(`  => vote count: ${voteCount}`)
   // NOTE: if the rating source doesn't include a vote count, this will assign as
@@ -12,5 +12,5 @@ export const assessThreshold = movie => {
   const exceedsRating = rating?.raw >= process.env.RATING_MINIMUM
   console.log(`  => rating: ${JSON.stringify(rating, null, 2)}`)
 
-  return { exceedsVoteCount, exceedsRating }
+  return exceedsRating && exceedsVoteCount
 }
