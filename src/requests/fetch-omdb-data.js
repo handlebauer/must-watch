@@ -14,7 +14,7 @@ export const fetchOmdbData = async (imdbId, details) => {
   const url = new URL('http://omdbapi.com')
   url.search = new URLSearchParams({ i: imdbId, apikey: apiKey })
 
-  console.log(`    => OMDB: ${url}`)
+  console.log(`    - OMDB: ${url}`)
 
   const response = await fetch(url)
 
