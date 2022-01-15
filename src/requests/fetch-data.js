@@ -14,7 +14,7 @@ export const fetchData = async url => {
 
   if (isNewMovie) {
     console.log()
-    console.log(`New candidate found: ${ptpData.title} (${ptpData.url})`)
+    console.log(`${ptpData.title} (${ptpData.url})`)
     console.log('  => Sending requests:')
 
     const [tmdbData, letterboxdData] = await Promise.all([
