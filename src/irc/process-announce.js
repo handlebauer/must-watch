@@ -5,7 +5,7 @@ import { fetchData } from '../requests/fetch-data.js'
 import formatMovie from '../utils/format-movie.js'
 import { meetsThreshold } from '../utils/meets-threshold.js'
 
-import { addMovieToRadarr } from './fetch-radarr-data.js'
+import { addMovieToRadarr } from '../requests/fetch-radarr-data.js'
 
 import { Discord } from '../discord/index.js'
 import { SMS } from '../sms/index.js'
