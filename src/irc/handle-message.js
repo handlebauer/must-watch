@@ -12,6 +12,7 @@ import {
 import formatMovie from '../utils/format-movie.js'
 
 import { Discord } from '../discord/index.js'
+import { SMS } from '../sms/index.js'
 
 config()
 
@@ -67,6 +68,7 @@ export default async (_, message) => {
 
     if (exceedsRating && exceedsVoteCount) {
       Discord.send(movie)
+      SMS.send(movie)
     }
   }
 }
