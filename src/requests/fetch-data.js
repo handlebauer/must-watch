@@ -18,7 +18,9 @@ export const fetchData = async url => {
       fetchLetterboxdData(ptpData.imdbId),
     ])
 
+    console.log()
     console.log(`New candidate found: ${tmdbData.title} (${ptpData.url})`)
+    console.log()
 
     if (tmdbData === null) {
       return

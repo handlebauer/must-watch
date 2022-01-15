@@ -24,6 +24,10 @@ export const processAnnounce = async url => {
       if (id) {
         await Discord.send(movie)
         await SMS.send(movie)
+
+        console.log()
+        console.log('Process complete')
+        console.log()
       }
     }
   }
