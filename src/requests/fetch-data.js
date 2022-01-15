@@ -23,6 +23,9 @@ export const fetchData = async url => {
     ])
 
     if (tmdbData === null) {
+      console.log('  => Aborted: no TMDB data found')
+      console.log('-- PROCESS COMPLETE --')
+      console.log()
       return
     }
 
@@ -32,6 +35,9 @@ export const fetchData = async url => {
     })
 
     if (omdbData === null) {
+      console.log('  => Aborted: no OMDB data found')
+      console.log('-- PROCESS COMPLETE --')
+      console.log()
       return
     }
 
