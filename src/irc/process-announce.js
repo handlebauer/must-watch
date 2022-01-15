@@ -26,7 +26,8 @@ export const processAnnounce = async url => {
         await SMS.send(movie)
       }
     }
+
+    console.log('-- PROCESS COMPLETE --')
+    console.log()
   }
-  console.log('-- PROCESS COMPLETE --')
-  console.log('-- PROCESS COMPLETE --')
 }
