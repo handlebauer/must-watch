@@ -1,6 +1,8 @@
 import { DISCORD_AUTHOR_ICON_URL } from '../constants.js'
 import json from '../utils/import-json.js'
 
+import { formatNumber } from '../utils/format-number.js'
+
 export const buildEmbed = async movie => {
   const title = `${
     movie.title === movie.originalTitle
@@ -37,7 +39,7 @@ export const buildEmbed = async movie => {
       value: Object.values(movie.ratings)
         .map(
           ({ name, value, count }) =>
-            `**${name}:** ${value}${count ? ` (${count})` : ''}`
+            `**${name}:** ${value}${count ? ` (${formatNumber(count)})` : ''}`
         )
         .join('\n'),
     },

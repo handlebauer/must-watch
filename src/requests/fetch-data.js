@@ -13,14 +13,14 @@ export const fetchData = async url => {
   const isNewMovie = ptpData?.numberOfTorrents === 1
 
   if (isNewMovie) {
+    console.log()
+    console.log(`New candidate found: ${ptpData.title} (${ptpData.url})`)
+    console.log('  => Sending requests:')
+
     const [tmdbData, letterboxdData] = await Promise.all([
       fetchTmdbData(ptpData.imdbId),
       fetchLetterboxdData(ptpData.imdbId),
     ])
-
-    console.log()
-    console.log(`New candidate found: ${tmdbData.title} (${ptpData.url})`)
-    console.log()
 
     if (tmdbData === null) {
       return

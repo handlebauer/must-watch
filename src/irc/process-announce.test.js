@@ -8,12 +8,12 @@ test.skip("Should abort when movie isn't the first uploaded movie", async t => {
   t.is(await processAnnounce(url), undefined)
 })
 
-test.skip('Should send notifications to recipients when threshold is met', async t => {
+test.skip('Should add movie to radarr send notifications to recipients when threshold is met', async t => {
   const url =
-    'https://passthepopcorn.me/torrents.php?id=223139&torrentid=802924'
+    'https://passthepopcorn.me/torrents.php?id=271191&torrentid=1003114'
 
   await processAnnounce(url)
 
-  // Check your phone!
+  // Check radarr & your phone!
   t.pass()
 })

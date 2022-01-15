@@ -35,7 +35,7 @@ export const addMovieToRadarr = async imdbId => {
   movie.qualityProfileId = 6
   movie.monitored = true
   movie.minimumAvailability = 'announced'
-  movie.addOptions = { searchForMovie: false }
+  movie.addOptions = { searchForMovie: true }
   movie.rootFolderPath = process.env.RADARR_ROOT_FOLDER_PATH
 
   const url = new URL(process.env.RADARR_HOST)

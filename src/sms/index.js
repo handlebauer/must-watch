@@ -1,7 +1,10 @@
 import { config } from 'dotenv'
 import twilio from 'twilio'
 
+import { formatNumber } from '../utils/format-number.js'
+
 config()
+
 const client = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN)
 const recipients = process.env.SMS_RECIPIENTS.split(',')
 
@@ -16,7 +19,7 @@ const buildBody = movie => {
   body += Object.values(movie.ratings)
     .map(
       ({ name, value, count }) =>
-        `${name}: ${value}${count ? ` (${count})` : ''}`
+        `${name}: ${value}${count ? ` (${formatNumber(count)})` : ''}`
     )
     .join('\n')
   return body

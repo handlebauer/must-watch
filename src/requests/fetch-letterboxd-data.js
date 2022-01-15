@@ -34,7 +34,7 @@ export const fetchLetterboxdData = async imdbId => {
     return undefined
   }
 
-  console.log(`    => Letterboxd: https://boxd.it/${lid}`)
+  console.log(`    => BOXD: https://boxd.it/${lid}`)
 
   const letterboxdStats = await getStats(lid)
   return letterboxdStats
