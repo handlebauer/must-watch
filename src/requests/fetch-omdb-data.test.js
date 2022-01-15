@@ -4,7 +4,7 @@ import { fetchOmdbData } from './fetch-omdb-data.js'
 
 const imdbId = 'tt6723592'
 
-test('Fetching OMDB data returns desired values', async t => {
+test.skip('Fetching OMDB data returns desired values', async t => {
   const omdbData = await fetchOmdbData(imdbId, { title: 'Tenet', year: 2020 })
 
   // Should yield something like:

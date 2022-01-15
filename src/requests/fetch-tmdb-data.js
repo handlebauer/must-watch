@@ -46,6 +46,7 @@ export const fetchTmdbData = async imdbId => {
       title: movie.title,
       originalTitle: movie.original_title,
       overview: movie.overview,
+      year: Number(movie.release_date.slice(0, 4)),
       genres: movie.genres,
       languages: movie.spoken_languages,
       runtime: movie.runtime,

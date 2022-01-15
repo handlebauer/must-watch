@@ -45,7 +45,9 @@ export const fetchMetacriticReviewCount = async params => {
 
   if (
     params.title.toLowerCase() !== title.toLowerCase() ||
-    params.year !== year
+    (params.year !== year &&
+      params.year + 1 !== year &&
+      params.year - 1 !== year)
   ) {
     return null
   }
