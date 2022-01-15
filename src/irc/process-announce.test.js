@@ -8,7 +8,7 @@ test.skip("Should abort when movie isn't the first uploaded movie", async t => {
   t.is(await processAnnounce(url), undefined)
 })
 
-test('Should send notifications to recipients when threshold is met', async t => {
+test.skip('Should send notifications to recipients when threshold is met', async t => {
   const url =
     'https://passthepopcorn.me/torrents.php?id=223139&torrentid=802924'
 
