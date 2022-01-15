@@ -37,9 +37,9 @@ export class SMS {
           from: process.env.TWILIO_NUMBER,
           mediaUrl: params.posterUrl,
         })
-        console.log(`SMS: ${message.status}`)
+        console.log(`  => SMS: ${message.status}`)
       } catch (err) {
-        console.error(`Twilio error: ${err.message}`)
+        console.error(`  => SMS: ${err.message}`)
       }
     })
 
