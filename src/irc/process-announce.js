@@ -16,11 +16,7 @@ export const processAnnounce = async url => {
   const data = await fetchData(url)
 
   if (data) {
-    console.log(data)
-    console.log()
-    console.log()
     const movie = formatMovie(data)
-    console.log(movie)
 
     if (meetsThreshold(movie)) {
       const id = await addMovieToRadarr(data.imdbId)
