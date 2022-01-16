@@ -8,9 +8,9 @@ export const meetsThreshold = movie => {
 
   const exceedsRating = rating.raw >= process.env.RATING_MINIMUM
 
-  // NOTE: if the rating source doesn't include a vote count, this will assign as
-  // true (i.e. we don't care about vote count for those sources with none)
-  const exceedsVoteCount = rating.count
+  // NOTE: if no minimum rating is specified, this will always assign as
+  // true (i.e. we don't care about vote count if the user doesn't)
+  const exceedsVoteCount = process.env.RATING_MINIMUM
     ? rating.count > process.env.VOTE_MINIMUM
     : true
 

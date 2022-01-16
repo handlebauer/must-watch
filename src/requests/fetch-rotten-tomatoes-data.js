@@ -30,8 +30,10 @@ export const fetchRottenTomatoesReviewCount = async params => {
     params.title
   )
 
+  const normalize = title => title.toLowerCase().replace(/\W/g, '')
+
   if (
-    params.title.toLowerCase() !== title.toLowerCase() ||
+    normalize(params.title) !== normalize(title) ||
     (params.year !== year &&
       params.year + 1 !== year &&
       params.year - 1 !== year)

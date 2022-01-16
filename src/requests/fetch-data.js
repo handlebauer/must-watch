@@ -3,8 +3,6 @@ import {
   fetchTmdbData,
   fetchOmdbData,
   fetchLetterboxdData,
-  fetchMetacriticReviewCount,
-  fetchRottenTomatoesReviewCount,
 } from './index.js'
 
 export const fetchData = async url => {

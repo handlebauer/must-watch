@@ -19,10 +19,10 @@ export class Discord {
     const response = await fetch(process.env.DISCORD_WEBHOOK_URL, init)
 
     if (!response.ok) {
-      throw new Error(
-        `Failed with status: ${response.status} (${response.statusText})`
-      )
+      console.error(`  => Discord: ${response.status} (${response.statusText})`)
     }
+
+    console.log(`  => Discord: sent`)
 
     return response
   }
