@@ -16,20 +16,22 @@ export const processAnnounce = async url => {
   const data = await fetchData(url)
 
   if (data) {
+    console.log(data)
+    console.log()
+    console.log()
     const movie = formatMovie(data)
-
     console.log(movie)
 
     if (meetsThreshold(movie)) {
-      // const id = await addMovieToRadarr(data.imdbId)
+      const id = await addMovieToRadarr(data.imdbId)
 
-      // if (id) {
-      // await Discord.send(movie)
-      // await SMS.send(movie)
-      console.log('-- PROCESS COMPLETE --')
-      console.log()
-      // return id
-      // }
+      if (id) {
+        await Discord.send(movie)
+        await SMS.send(movie)
+        console.log('-- PROCESS COMPLETE --')
+        console.log()
+        return id
+      }
     }
 
     console.log('-- PROCESS COMPLETE --')

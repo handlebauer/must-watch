@@ -10,7 +10,12 @@ const recipients = process.env.SMS_RECIPIENTS.split(',')
 
 const buildBody = movie => {
   let body = 'Must Watch: '
-  body += `${movie.title} (${movie.year}) by ${movie.director}`
+  body +=
+    movie.title === movie.originalTitle
+      ? movie.title
+      : `${movie.title} AKA ${movie.originalTitle}`
+  body += `(${movie.year}) by ${movie.director}`
+
   body += '\n\n'
   body += Object.values(movie.ratings)
     .map(

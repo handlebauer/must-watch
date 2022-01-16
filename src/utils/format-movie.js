@@ -25,6 +25,7 @@ export default movie => {
 
   return {
     title: movie.title,
+    originalTitle: movie.originalTitle,
     year: movie.year,
     director: movie.director,
     genres,
