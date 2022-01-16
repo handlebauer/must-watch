@@ -1,7 +1,4 @@
 export default movie => {
-  const title =
-    movie.title +
-    (movie.originalTitle !== movie.title ? ` AKA ${movie.originalTitle}` : '')
   const genres = movie.genres.map(({ name }) => name)
   const languages = movie.languages.map(({ english_name: name }) => name)
 
@@ -27,8 +24,7 @@ export default movie => {
     )
 
   return {
-    title,
-    originalTitle: movie.originalTitle,
+    title: movie.title,
     year: movie.year,
     director: movie.director,
     genres,

@@ -43,8 +43,6 @@ export const fetchTmdbData = async imdbId => {
 
     result = {
       type: 'Movie',
-      title: movie.title,
-      originalTitle: movie.original_title,
       overview: movie.overview,
       year: Number(movie.release_date.slice(0, 4)),
       genres: movie.genres,
@@ -71,8 +69,6 @@ export const fetchTmdbData = async imdbId => {
 
     result = {
       type: tvShow.type,
-      title: tvShow.name,
-      originalTitle: tvShow.original_name,
       year: startYear === endYear ? startYear : `${startYear}-${endYear}`,
       overview: tvShow.overview,
       genres: tvShow.genres,

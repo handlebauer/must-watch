@@ -2,59 +2,40 @@ import test from 'ava'
 
 import { buildEmbed } from './build-embed.js'
 
-test.skip('Building embed returns desirable object', async t => {
+test('Building embed returns desirable object', async t => {
   const movie = {
-    title: 'Violent',
-    originalTitle: 'Violent',
-    year: '2014',
-    director: 'Andrew Huculiak',
-    genres: ['Drama'],
-    languages: ['English', 'Norwegian'],
-    runtime: 102,
+    title: 'The Worst Person in the World AKA Verdens verste menneske',
+    year: 2021,
+    director: 'Joachim Trier',
+    genres: ['Comedy', 'Drama', 'Romance'],
+    languages: ['Norwegian'],
+    runtime: 128,
     overview:
-      'A young woman, and her last memories of the five people who loved her most, recalled while experiencing a catastrophic event.',
+      'Chronicles four years in the life of Julie, a young woman who navigates the troubled waters of her love life and struggles to find her career path, leading her to take a realistic look at who she really is.',
     ratings: {
-      imdb: { name: 'IMDB', raw: 7.3, value: '7.3/10', count: 689 },
+      imdb: { name: 'IMDb', raw: 8, value: '8/10', count: 8243 },
       letterboxd: {
         name: 'Letterboxd',
-        raw: 3.81,
-        value: '3.81/5',
-        count: 871,
+        raw: 4.14,
+        value: '4.14/5',
+        count: 31089,
       },
+      rotten_tomatoes: {
+        name: 'Rotten Tomatoes',
+        raw: 100,
+        value: '100%',
+        count: 73,
+      },
+      metacritic: { name: 'Metacritic', raw: 88, value: '88/100', count: 17 },
     },
     posterUrl:
-      'https://image.tmdb.org/t/p/w342/1ZMWrTpkJ5dZhej7mVEuMeSkoxK.jpg',
-    url: 'https://passthepopcorn.me/torrents.php?id=173329&torrentid=599855',
+      'https://image.tmdb.org/t/p/w342/4dF5NT1dxw4CItns4ckXq4309bg.jpg',
+    url: 'https://passthepopcorn.me/torrents.php?id=271486&torrentid=1003975',
   }
 
   const embed = await buildEmbed(movie)
 
-  // Should yield something like:
-  //    const embed = {
-  //      author: { name: 'MustWatch', icon_url: 'https://i.imgur.com/OEXcE7w.jpg' },
-  //      title: 'Violent (2014) by Andrew Huculiak',
-  //      url: 'https://passthepopcorn.me/torrents.php?id=173329&torrentid=599855',
-  //      color: 4444928,
-  //      fields: [
-  //        {
-  //          name: '__Overview__',
-  //          value:
-  //            '||A young woman, and her last memories of the five people who loved her most, recalled while experiencing a catastrophic event.||',
-  //        },
-  //        { name: '__Genre(s)__', value: 'Drama', inline: true },
-  //        { name: '__Language(s)__', value: 'English, Norwegian', inline: true },
-  //        { name: '__Runtime__', value: '102 minutes', inline: true },
-  //        { name: '__Ratings__', value: '**IMDB:** 7.3/10 (689)\n**Letterboxd:** 3.81/5 (871)' },
-  //      ],
-  //      image: {
-  //        url: 'https://image.tmdb.org/t/p/w342/1ZMWrTpkJ5dZhej7mVEuMeSkoxK.jpg',
-  //      },
-  //      footer: {
-  //        text: 'handlebauer/must-watch#readme • v0.0.3',
-  //        icon_url: 'https://i.imgur.com/lPzI6km.png',
-  //      },
-  //      timestamp: '2021-12-07T00:11:07.021Z',
-  //    }
+  console.log(embed)
 
   t.regex(embed.title, /.+ \(\d{4}\) by .+/)
   t.is(embed.fields.length, 5)

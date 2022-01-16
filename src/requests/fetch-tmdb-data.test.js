@@ -3,10 +3,8 @@ import test from 'ava'
 import { fetchTmdbData } from './fetch-tmdb-data.js'
 
 test.skip('Fetching TMDB data returns desired values when IMDB ID refrences a movie result', async t => {
-  const imdbId = 'tt6723592'
+  const imdbId = 'tt10370710'
   const tmdbData = await fetchTmdbData(imdbId)
-
-  console.log(tmdbData)
 
   // Should yield something like
   //    {
@@ -27,7 +25,7 @@ test.skip('Fetching TMDB data returns desired values when IMDB ID refrences a mo
   t.is(typeof tmdbData, 'object')
   t.is(tmdbData.title, 'Tenet')
   t.is(tmdbData.originalTitle, 'Tenet')
-  t.is(tmdbData.type, 'movie')
+  t.is(tmdbData.type, 'Movie')
   t.truthy(tmdbData.overview)
   t.true(Array.isArray(tmdbData.genres))
   t.true(Array.isArray(tmdbData.languages))

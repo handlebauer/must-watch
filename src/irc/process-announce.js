@@ -18,16 +18,18 @@ export const processAnnounce = async url => {
   if (data) {
     const movie = formatMovie(data)
 
-    if (meetsThreshold(movie)) {
-      const id = await addMovieToRadarr(data.imdbId)
+    console.log(movie)
 
-      if (id) {
-        await Discord.send(movie)
-        await SMS.send(movie)
-        console.log('-- PROCESS COMPLETE --')
-        console.log()
-        return id
-      }
+    if (meetsThreshold(movie)) {
+      // const id = await addMovieToRadarr(data.imdbId)
+
+      // if (id) {
+      // await Discord.send(movie)
+      // await SMS.send(movie)
+      console.log('-- PROCESS COMPLETE --')
+      console.log()
+      // return id
+      // }
     }
 
     console.log('-- PROCESS COMPLETE --')
