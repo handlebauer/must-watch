@@ -1,8 +1,8 @@
 {
   "name": "must-watch",
   "version": "0.1.0",
-  "description": "A service to keep an eye out for must-watch films so you don't have to",
-  "homepage": "https://github.com/handlebauer/must-watch#readme",
+  "description": "Keeps an eye out for must-watch films so you don't have to",
+  "homepage": "https://github.com/handlebauer/must-watch",
   "bugs": {
     "url": "https://github.com/handlebauer/must-watch/issues"
   },
