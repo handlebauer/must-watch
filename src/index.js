@@ -6,7 +6,7 @@ const log = Discord.internalLog()
 new Promise(() => connect(log)).catch(Discord.error)
 
 process.once('SIGINT', () => {
-  log.add('Gracefully shutting down...')
+  log.add('MustWatch: Gracefully shutting down...')
   log.send().then(() => {
     process.exit(143)
   })

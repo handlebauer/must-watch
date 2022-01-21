@@ -10,7 +10,7 @@ const config = {
 }
 
 export default async log => {
-  log.add('Booting up...')
+  log.add('MustWatch: Booting up...')
   await log.send()
 
   const client = new Client(IRC_SERVER, BOT_NAME, config)
