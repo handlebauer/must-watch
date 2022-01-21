@@ -3,7 +3,9 @@ import { Discord } from './discord/index.js'
 
 const log = Discord.internalLog()
 
-new Promise(() => connect(log)).catch(Discord.error)
+new Promise(() => connect(log)).catch(
+  async error => await Discord.log('internal', { error })
+)
 
 process.once('SIGINT', () => {
   log.add('MustWatch: Gracefully shutting down...')
@@ -13,7 +15,6 @@ process.once('SIGINT', () => {
 })
 
 process.on('unhandledRejection', async error => {
-  const channel = '#internal-log'
-  console.log(`  => Discord (${channel}): sending unhandledRejection error`)
-  await Discord.log(channel, { error })
+  console.log(`  => Discord: sending unhandledRejection error`)
+  await Discord.log('internal', { error })
 })
