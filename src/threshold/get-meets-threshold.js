@@ -1,6 +1,6 @@
 import { parseSourceThresholds } from './parse-source-thresholds.js'
 
-export const meetsThreshold = (movie, log) => {
+export const getMeetsThreshold = (movie, log) => {
   const scoreExceeded = ({ source, rating }) =>
     movie.ratings[source]?.raw >= rating
   const votesExceeded = ({ source, voteCount }) =>
@@ -17,23 +17,25 @@ export const meetsThreshold = (movie, log) => {
     })
   )
 
-  const thresholdExceeded = sourceThresholds.every(({ passed }) => passed)
+  const thresholdExceededs = sourceThresholds.every(({ passed }) => passed)
 
-  if (thresholdExceeded) {
-    const logText = sourceThresholds
+  if (thresholdExceededs) {
+    const message = sourceThresholds
       .map(({ source }) => {
         const fetchedRating = movie.ratings[source]
         return `    - Rating (${source}): ${fetchedRating.value} (${fetchedRating.count})`
       })
       .join('\n')
 
-    log.add('  => Threshold passed')
-    log.add(logText)
+    log.add('  => All thresholds passed')
+    log.add(message)
 
-    return true
+    return { all: true }
   }
 
-  const logText = sourceThresholds
+  const someThresholdsExceeded = sourceThresholds.some(({ passed }) => passed)
+
+  const message = sourceThresholds
     .map(({ source, passed }) => {
       const fetchedRating = movie.ratings[source]
       const label = `Rating (${source})`
@@ -54,8 +56,15 @@ export const meetsThreshold = (movie, log) => {
     })
     .join('\n')
 
-  log.add('  => Threshold failed')
-  log.add(logText)
+  if (someThresholdsExceeded) {
+    log.add('  => Some thresholds passed')
+    log.add(message)
 
-  return false
+    return { some: true }
+  }
+
+  log.add('  => Threshold failed')
+  log.add(message)
+
+  return
 }

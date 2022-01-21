@@ -13,6 +13,7 @@ process.once('SIGINT', () => {
 })
 
 process.on('unhandledRejection', async error => {
-  console.log('  => Discord (#log): sending unhandledRejection error')
-  await Discord.error(error)
+  const channel = '#internal-log'
+  console.log(`  => Discord (${channel}): sending unhandledRejection error`)
+  await Discord.log(channel, { error })
 })

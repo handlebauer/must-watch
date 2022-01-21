@@ -2,7 +2,7 @@ import test from 'ava'
 
 import { buildEmbed } from './build-embed.js'
 
-test('Building embed returns desirable object', async t => {
+test.skip('Building embed returns desirable object', async t => {
   const movie = {
     title: 'The Worst Person in the World',
     originalTitle: 'Verdens verste menneske',

@@ -16,7 +16,7 @@ export class InternalLog {
   async send() {
     const message = this.toString()
     this.clear()
-    return Discord.send('#internal-log', message)
+    return Discord.log('#internal-log', { message })
   }
 
   toString() {

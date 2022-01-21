@@ -3,7 +3,7 @@ import { config } from 'dotenv'
 import { fetchData } from '../requests/fetch-data.js'
 
 import formatMovie from '../utils/format-movie.js'
-import { meetsThreshold } from '../threshold/meets-threshold.js'
+import { getMeetsThreshold } from '../threshold/get-meets-threshold.js'
 
 import { addMovieToRadarr } from '../requests/fetch-radarr-data.js'
 
@@ -18,14 +18,22 @@ export const processAnnounce = async (url, log) => {
   if (data) {
     const movie = formatMovie(data)
 
-    if (meetsThreshold(movie, log)) {
-      const id = await addMovieToRadarr(data.imdbId, log)
+    const meetsThreshold = getMeetsThreshold(movie, log)
 
-      if (id) {
-        await Discord.log(movie, log)
+    if (meetsThreshold.some) {
+      await Discord.log('#runner-up-log', { embed: movie })
+      await log.send()
+      return
+    }
+
+    if (meetsThreshold.all) {
+      const radarrMovieId = await addMovieToRadarr(data.imdbId, log)
+
+      if (radarrMovieId) {
+        await Discord.log('#log', { embed: movie })
         await SMS.send(movie, log)
         await log.send()
-        return id
+        return radarrMovieId
       }
     }
 

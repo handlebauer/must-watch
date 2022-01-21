@@ -34,10 +34,6 @@ export const buildEmbed = async movie => {
       value: `${movie.runtime} minutes`,
       inline: true,
     },
-    movie.releaseName && {
-      name: '__Release Name__',
-      value: `\`${movie.releaseName}\``,
-    },
     {
       name: '__Ratings__',
       value: Object.values(movie.ratings)
@@ -46,6 +42,10 @@ export const buildEmbed = async movie => {
             `**${name}:** ${value}${count ? ` (${formatNumber(count)})` : ''}`
         )
         .join('\n'),
+    },
+    movie.releaseName && {
+      name: '__Release__',
+      value: `\`${movie.releaseName}\``,
     },
   ].filter(Boolean)
 
