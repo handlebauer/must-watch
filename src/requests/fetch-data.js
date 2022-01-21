@@ -12,7 +12,7 @@ export const fetchData = async (url, log) => {
 
   if (isNewMovie) {
     log.add(`${ptpData.title} (${ptpData.url})`)
-    log.add('  => Sending requests:')
+    log.add('  => Sending requests')
 
     const [tmdbData, letterboxdData] = await Promise.all([
       fetchTmdbData(ptpData.imdbId, log),
