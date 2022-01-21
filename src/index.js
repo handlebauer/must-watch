@@ -11,3 +11,8 @@ process.once('SIGINT', () => {
     process.exit(143)
   })
 })
+
+process.on('unhandledRejection', async error => {
+  console.log('  => Discord (#log): sending unhandledRejection error')
+  await Discord.error(error)
+})
