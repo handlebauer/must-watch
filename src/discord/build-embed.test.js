@@ -2,7 +2,7 @@ import test from 'ava'
 
 import { buildEmbed } from './build-embed.js'
 
-test.skip('Building embed returns desirable object', async t => {
+test('Building embed returns desirable object', async t => {
   const movie = {
     title: 'The Worst Person in the World',
     originalTitle: 'Verdens verste menneske',
@@ -13,6 +13,7 @@ test.skip('Building embed returns desirable object', async t => {
     runtime: 128,
     overview:
       'Chronicles four years in the life of Julie, a young woman who navigates the troubled waters of her love life and struggles to find her career path, leading her to take a realistic look at who she really is.',
+    releaseName: '18.12.2021.Dan.Mirvish.720p.WEB-DL.x264-gooz',
     ratings: {
       imdb: { name: 'IMDb', raw: 8, value: '8/10', count: 8243 },
       letterboxd: {
@@ -39,7 +40,7 @@ test.skip('Building embed returns desirable object', async t => {
   console.log(embed)
 
   t.regex(embed.title, /.+ \(\d{4}\) by .+/)
-  t.is(embed.fields.length, 5)
+  t.is(embed.fields.length, 6)
 })
 
 test.skip('Building embed with empty over, genres, languages, and runtime returns desirable object', async t => {

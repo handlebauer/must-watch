@@ -31,13 +31,13 @@ test.skip('Should successfully send a movie notification via Discord webhook to 
   t.is(response.status, 204)
 })
 
-test('Should successfully send an error notification via Discord webhook to #log', async t => {
+test.skip('Should successfully send an error notification via Discord webhook to #log', async t => {
   const response = await Discord.error(new Error('testing'))
 
   t.is(response.status, 204)
 })
 
-test('Should successfully send an internal log via Discord webhook to #internal-log', async t => {
+test.skip('Should successfully send an internal log via Discord webhook to #internal-log', async t => {
   const log = Discord.internalLog()
 
   log.add('Hello')

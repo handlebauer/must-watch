@@ -21,7 +21,6 @@ export const fetchData = async (url, log) => {
 
     if (tmdbData === null) {
       log.add('  => Aborted: no TMDB data found')
-      log.add('-- PROCESS COMPLETE --')
       await log.send()
       return
     }
@@ -37,7 +36,6 @@ export const fetchData = async (url, log) => {
 
     if (omdbData === null) {
       log.add('  => Aborted: no OMDB data found')
-      log.add('-- PROCESS COMPLETE --')
       await log.send()
       return
     }

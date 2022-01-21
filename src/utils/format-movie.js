@@ -32,6 +32,7 @@ export default movie => {
     languages,
     runtime: movie.runtime,
     overview: movie.overview,
+    releaseName: movie.releaseName,
     ratings,
     posterUrl: movie.posterUrl,
     url: movie.url,

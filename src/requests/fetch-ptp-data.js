@@ -27,6 +27,7 @@ export const fetchPtpData = async url => {
   return {
     url,
     title: collection.Name,
+    releaseName: collection.Torrents[0].ReleaseName,
     imdbId: `tt${collection.ImdbId}`,
     imdbRating: Number(collection.ImdbRating),
     imdbVoteCount: Number(collection.ImdbVoteCount),
