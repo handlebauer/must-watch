@@ -48,7 +48,7 @@ export const getMeetsThreshold = (movie, log) => {
         return `    - ${label}: ${message}`
       }
       if (!fetchedRating.count) {
-        const message = 'unable to find vote/review count'
+        const message = `found score of ${fetchedRating.value} but unable to find vote/review count`
         return `    - ${label}: ${message}`
       }
       const message = `${fetchedRating.value} (${fetchedRating.count}) does not meet threshold`
