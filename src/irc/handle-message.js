@@ -5,8 +5,7 @@ export default log => async (_, message) => {
   const re = /(?<url>https.+)\s\//
   const { url } = message.match(re)?.groups
 
-  log.add(`PTP announce: ${url}`)
-  log.send()
+  console.log(`PTP announce: ${url}`)
 
   processAnnounce(url, log)
 }
