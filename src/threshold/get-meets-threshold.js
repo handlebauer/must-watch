@@ -66,5 +66,5 @@ export const getMeetsThreshold = (movie, log) => {
   log.add('  => Threshold failed')
   log.add(message)
 
-  return
+  return { none: true }
 }
