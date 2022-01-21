@@ -9,7 +9,10 @@ const config = {
   realName: BOT_NAME,
 }
 
-export default log => {
+export default async log => {
+  log.add('Booting up...')
+  await log.send()
+
   const client = new Client(IRC_SERVER, BOT_NAME, config)
   client.connect(handleConnect(client, log))
 }
