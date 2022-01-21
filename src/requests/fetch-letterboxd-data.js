@@ -27,14 +27,14 @@ const getStats = async lid => {
   }
 }
 
-export const fetchLetterboxdData = async imdbId => {
+export const fetchLetterboxdData = async (imdbId, log) => {
   const lid = await getLid(imdbId)
 
   if (!lid) {
     return undefined
   }
 
-  console.log(`    - BOXD: https://boxd.it/${lid}`)
+  log.add(`    - BOXD: https://boxd.it/${lid}`)
 
   const letterboxdStats = await getStats(lid)
   return letterboxdStats

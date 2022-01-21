@@ -1,6 +1,8 @@
 import { config } from 'dotenv'
 import twilio from 'twilio'
 
+import { Discord } from '../discord/index.js'
+
 import { formatNumber } from '../utils/format-number.js'
 
 config()
@@ -27,7 +29,7 @@ const buildBody = movie => {
 }
 
 export class SMS {
-  static async send(params) {
+  static async send(params, log) {
     const body = buildBody(params)
 
     const promises = recipients.map(async recipient => {
@@ -38,9 +40,9 @@ export class SMS {
           from: process.env.TWILIO_NUMBER,
           mediaUrl: params.posterUrl,
         })
-        console.log(`  => SMS: ${message.status} for ${recipient}`)
-      } catch (err) {
-        console.error(`  => SMS: ${err.message}`)
+        log.add(`  => SMS: ${message.status} for ${recipient}`)
+      } catch (error) {
+        Discord.error(error)
       }
     })
 

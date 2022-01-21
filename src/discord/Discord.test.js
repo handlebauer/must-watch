@@ -2,7 +2,7 @@ import test from 'ava'
 
 import { Discord } from './index.js'
 
-test.skip('Should successfully send Discord notification via webhook', async t => {
+test.skip('Should successfully send a movie notification via Discord webhook to #log', async t => {
   const mockMovie = {
     title: 'Violent',
     originalTitle: 'Violent',
@@ -27,6 +27,23 @@ test.skip('Should successfully send Discord notification via webhook', async t =
     url: 'https://passthepopcorn.me/torrents.php?id=173329&torrentid=599855',
   }
   const response = await Discord.send(mockMovie)
+
+  t.is(response.status, 204)
+})
+
+test('Should successfully send an error notification via Discord webhook to #log', async t => {
+  const response = await Discord.error(new Error('testing'))
+
+  t.is(response.status, 204)
+})
+
+test('Should successfully send an internal log via Discord webhook to #internal-log', async t => {
+  const log = Discord.internalLog()
+
+  log.add('Hello')
+  log.add('World')
+
+  const response = await log.send()
 
   t.is(response.status, 204)
 })

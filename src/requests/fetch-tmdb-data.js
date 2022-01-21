@@ -5,14 +5,14 @@ import { TMDB_BASE_URL, TMDB_API_VERSION } from '../constants.js'
 
 config()
 
-export const fetchTmdbData = async imdbId => {
+export const fetchTmdbData = async (imdbId, log) => {
   const url = new URL(`${TMDB_BASE_URL}/${TMDB_API_VERSION}/find/${imdbId}`)
   url.search = new URLSearchParams({
     api_key: process.env.TMDB_API_KEY,
     external_source: 'imdb_id',
   })
 
-  console.log(`    - TMDB: ${url}`)
+  log.add(`    - TMDB: ${url}`)
 
   let response = await fetch(url)
 

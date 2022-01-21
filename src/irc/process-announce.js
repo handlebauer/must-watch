@@ -12,25 +12,25 @@ import { SMS } from '../sms/index.js'
 
 config()
 
-export const processAnnounce = async url => {
-  const data = await fetchData(url)
+export const processAnnounce = async (url, log) => {
+  const data = await fetchData(url, log)
 
   if (data) {
     const movie = formatMovie(data)
 
-    if (meetsThreshold(movie)) {
-      const id = await addMovieToRadarr(data.imdbId)
+    if (meetsThreshold(movie, log)) {
+      const id = await addMovieToRadarr(data.imdbId, log)
 
       if (id) {
-        await Discord.send(movie)
-        await SMS.send(movie)
-        console.log('-- PROCESS COMPLETE --')
-        console.log()
+        await Discord.log(movie, log)
+        await SMS.send(movie, log)
+        log.add('-- PROCESS COMPLETE --')
+        await log.send()
         return id
       }
     }
 
-    console.log('-- PROCESS COMPLETE --')
-    console.log()
+    log.add('-- PROCESS COMPLETE --')
+    await log.send()
   }
 }

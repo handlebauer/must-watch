@@ -9,7 +9,7 @@ const config = {
   realName: BOT_NAME,
 }
 
-export default () => {
+export default log => {
   const client = new Client(IRC_SERVER, BOT_NAME, config)
-  client.connect(handleConnect(client))
+  client.connect(handleConnect(client, log))
 }

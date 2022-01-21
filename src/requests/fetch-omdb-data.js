@@ -8,13 +8,13 @@ import {
 
 config()
 
-export const fetchOmdbData = async (imdbId, details) => {
+export const fetchOmdbData = async (imdbId, details, log) => {
   const apiKey = 'aa538a64'
 
   const url = new URL('http://omdbapi.com')
   url.search = new URLSearchParams({ i: imdbId, apikey: apiKey })
 
-  console.log(`    - OMDB: ${url}`)
+  log.add(`    - OMDB: ${url}`)
 
   const response = await fetch(url)
 

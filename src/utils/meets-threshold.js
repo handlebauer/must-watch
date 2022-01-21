@@ -1,8 +1,8 @@
-export const meetsThreshold = movie => {
+export const meetsThreshold = (movie, log) => {
   const rating = movie.ratings[process.env.RATING_SOURCE]
 
   if (!rating) {
-    console.log(`  => Rating (${process.env.RATING_SOURCE}): not found`)
+    log.add(`  => Rating (${process.env.RATING_SOURCE}): not found`)
     return false
   }
 
@@ -14,7 +14,7 @@ export const meetsThreshold = movie => {
     ? rating.count > process.env.VOTE_MINIMUM
     : true
 
-  console.log(
+  log.add(
     `  => Rating: ${rating.name} - ${rating.value} ${
       rating.count ? `(${rating.count})` : ''
     }`

@@ -1,6 +1,8 @@
 import { config } from 'dotenv'
 import fetch from 'node-fetch'
 
+import { Discord } from '../discord/index.js'
+
 config()
 
 export const fetchMovieDetails = async imdbId => {
@@ -24,11 +26,11 @@ export const fetchMovieDetails = async imdbId => {
   return movie
 }
 
-export const addMovieToRadarr = async imdbId => {
+export const addMovieToRadarr = async (imdbId, log) => {
   const movie = await fetchMovieDetails(imdbId)
 
   if (!movie) {
-    console.log(`  => radarr: failed to add new movie`)
+    await Discord.error(new Error('radarr: failed to add new movie'))
     return null
   }
 
@@ -61,10 +63,7 @@ export const addMovieToRadarr = async imdbId => {
 
   const { id } = await response.json()
 
-  if (id) {
-    console.log(`  => radarr: added new movie (id: ${id})`)
-    return id
-  }
+  log.send(`  => radarr: added new movie (id: ${id})`)
 
-  return null
+  return id
 }

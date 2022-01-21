@@ -4,13 +4,14 @@ import handleMessage from './handle-message.js'
 
 config()
 
-export default client => () => {
-  console.log(`IRC: connected as ${client.hostMask}`)
+export default (client, log) => () => {
+  log.add(`IRC: connected as ${client.hostMask}`)
+  log.send()
 
   client.say(
     'Hummingbird',
     `ENTER ${process.env.PTP_USERNAME} ${process.env.PTP_IRC_KEY} ${IRC_CHANNEL}`
   )
 
-  client.addListener(`message${IRC_CHANNEL}`, handleMessage)
+  client.addListener(`message${IRC_CHANNEL}`, handleMessage(log))
 }
