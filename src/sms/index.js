@@ -16,7 +16,7 @@ const buildBody = movie => {
     movie.title === movie.originalTitle
       ? movie.title
       : `${movie.title} AKA ${movie.originalTitle}`
-  body += `(${movie.year}) by ${movie.director}`
+  body += ` (${movie.year}) by ${movie.director}`
 
   body += '\n\n'
   body += Object.values(movie.ratings)
