@@ -41,7 +41,7 @@ export const addMovieToRadarr = async (imdbId, log) => {
   movie.rootFolderPath = process.env.RADARR_ROOT_FOLDER_PATH
 
   const url = new URL(process.env.RADARR_HOST)
-  url.pathname = 'api/v3/movie'
+  url.pathname = process.env.RADARR_PATH
   url.search = new URLSearchParams({
     apiKey: process.env.RADARR_API_KEY,
     term: `imdb:${imdbId}`,
@@ -63,7 +63,7 @@ export const addMovieToRadarr = async (imdbId, log) => {
 
   const { id } = await response.json()
 
-  log.send(`  => radarr: added new movie (id: ${id})`)
+  log.add(`  => radarr: added movie (id: ${id})`)
 
   return id
 }
