@@ -27,14 +27,10 @@ export const processAnnounce = async (url, log) => {
     }
 
     if (meetsThreshold.all) {
+      await Discord.log('primary', { embed: movie })
+      await SMS.send(movie, log)
       const radarrMovieId = await addMovieToRadarr(data.imdbId, log)
-
-      if (radarrMovieId) {
-        await Discord.log('primary', { embed: movie })
-        await SMS.send(movie, log)
-        await log.send()
-        return radarrMovieId
-      }
+      await log.send()
     }
 
     await log.send()
