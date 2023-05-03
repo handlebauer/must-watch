@@ -52,7 +52,7 @@ export const fetchRottenTomatoesReviewCount = async params => {
   const html = await response.text()
   const $ = cheerio.load(html)
 
-  const reviewCount = $('a[slot="critics-count"]').text().match(/\n\s+(\d+).+/)[1]
+  const reviewCount = $('a[slot="critics-count"]').text().match(/(\d+)/g)[0]
 
   return Number(reviewCount)
 }
