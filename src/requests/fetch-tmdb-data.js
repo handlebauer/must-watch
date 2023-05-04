@@ -66,6 +66,10 @@ export const fetchTmdbData = async (imdbId, log) => {
     }
     const tvShow = await response.json()
 
+    if (tvShow === null) {
+      return null
+    }
+
     const [startYear] = tvShow.first_air_date.split('-')
     const [endYear] = tvShow.last_air_date.split('-')
 
