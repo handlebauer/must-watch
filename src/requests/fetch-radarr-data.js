@@ -7,10 +7,10 @@ config()
 
 export const fetchMovieDetails = async imdbId => {
   const url = new URL(process.env.RADARR_HOST)
-  url.pathname = 'api/v3/movie/lookup'
+  url.pathname = process.env.RADARR_PATH
   url.search = new URLSearchParams({
     apiKey: process.env.RADARR_API_KEY,
-    term: `imdb:${imdbId}`,
+    imdbId,
   })
 
   const response = await fetch(url)
@@ -21,9 +21,7 @@ export const fetchMovieDetails = async imdbId => {
     )
   }
 
-  const [movie] = await response.json()
-
-  return movie
+  return response.json()
 }
 
 export const addMovieToRadarr = async (imdbId, log) => {
